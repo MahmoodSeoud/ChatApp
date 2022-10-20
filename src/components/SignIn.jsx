@@ -2,7 +2,7 @@ import React from 'react'
 
 import { GoogleAuthProvider, signInWithRedirect } from 'firebase/auth'
 import GoogleButton from 'react-google-button'
-
+import "../App.css"
 import { auth } from '../services/firebase' 
 
 
@@ -17,8 +17,8 @@ const googleSignIn = () => {
 
 export default function SignIn() {
   return (
-    <div className={style.wrapper}>
-        <GoogleButton  onClick={googleSignIn}/>
-    </div>
+      <>
+        <GoogleButton onClick={googleSignIn} className="sign-in"/>
+      </>
   )
 }

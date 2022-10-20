@@ -1,5 +1,5 @@
 import React,  {useState} from 'react'
-
+import "../App.css"
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import {auth, db} from '../services/firebase'
 
@@ -20,20 +20,22 @@ async function sendMessage(e) {
         return;
     }
 
-    const {uid, displayName} = auth.currentUser
+    const {uid, displayName, photoURL} = auth.currentUser
+    console.log(auth.currentUser)
     await addDoc(collection(db, 'messages'), {
         text: input,
         name: displayName,
         uid,
+        photoURL,
         createdAt: serverTimestamp()
     })
     setInput("")
     scroll.current.scrollIntoView({behavior: 'smooth'})
 }
   return (
-    <form className={style.form} onSubmit={sendMessage}>
-        <input value={input} onChange={(e) => setInput(e.target.value)} className={style.input} type="text" placeholder='Message'/> 
-        <button className={style.button}>Send</button>
+    <form onSubmit={sendMessage}>
+        <input value={input} onChange={(e) => setInput(e.target.value)} type="text" placeholder='Message'/> 
+        <button>Send</button>
     </form>
   )
 }

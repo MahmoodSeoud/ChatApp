@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 
 import { collection, onSnapshot, query, orderBy} from 'firebase/firestore';
 import { db } from '../services/firebase'
+import "../App.css"
 
 import { Message, SendMessage } from './';
 
@@ -26,20 +27,14 @@ useEffect(() => {
     return () => unsubscribe();
   }, []);
 
-  return (
-    <>
-        <main className={style.main}>
-            {/* Chat message component */}
-            {messages && messages.map((message) => (
-                <Message key={message.id} message={message} />
-                ))}
+  return (<>
+    <main>
+      {messages && messages.map(msg => <Message key={msg.id} message={msg} />)}
+      <span ref={scroll}></span>
 
-        </main>
-            {/* Send message component */}
-            <SendMessage scroll={scroll} />
-            <span ref={scroll}></span>
-    </>
-  )
+    </main>    
+      <SendMessage scroll={scroll} />
+  </>)
 }
 
 export default Chat
